@@ -17,5 +17,14 @@ public class Controller {
     private Button writeBtn;
     @FXML
     private Label statusLabel;
-    
+
+    @FXML
+    public void readClicked() {
+        System.out.println("READ CLICKED");
+    }
+
+    @FXML
+    public void writeClicked() {
+        System.out.println("WRITE CLICKED");
+    }
 }

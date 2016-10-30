@@ -10,7 +10,7 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
 
-<GridPane minWidth="-Infinity" xmlns="http://javafx.com/javafx/8.0.65" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.Controller">
+<GridPane minWidth="-Infinity" xmlns="http://javafx.com/javafx/null" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.Controller">
     <columnConstraints>
         <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" />
         <ColumnConstraints hgrow="SOMETIMES" maxWidth="-Infinity" minWidth="-Infinity" />
@@ -26,8 +26,8 @@
         <TextArea fx:id="fileContent" prefHeight="31.0" prefWidth="100.0" GridPane.rowIndex="1" GridPane.rowSpan="2" />
         <VBox GridPane.columnIndex="1" GridPane.rowIndex="1" GridPane.rowSpan="2">
             <children>
-                <Button fx:id="readBtn" mnemonicParsing="false" onAction="#readClicked" text="Read" />
-                <Button fx:id="writeBtn" mnemonicParsing="false" text="Write" />
+                <Button fx:id="readBtn" mnemonicParsing="false" onMouseClicked="#readClicked" text="Read" />
+                <Button fx:id="writeBtn" mnemonicParsing="false" onMouseClicked="#writeClicked" text="Write" />
             </children>
         </VBox>
       <Label fx:id="statusLabel" maxHeight="-Infinity" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" GridPane.rowIndex="3" />
