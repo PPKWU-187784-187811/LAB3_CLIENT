@@ -28,30 +28,30 @@ public class Controller {
 
     @FXML
     public void readClicked() {
-        System.out.println("READ CLICKED");
-        disableButtons();
+        disableControls();
         Task task = new Task<Void>() {
             @Override
             public Void call() throws Exception {
                 String text = iLibrary.readFile(fileName.getText(), (result) -> {
                     Platform.runLater(() -> {
                         if (resultIsSuccess(result)) {
-                            statusLabel.setText("Read from finished!");
-                        } else if (resultIsFaiulure(result)) {
-                            statusLabel.setText("Read from failed!");
+                            setStatus("Read from finished!");
+                        } else if (resultIsFailure(result)) {
+                            setStatus("Read from failed!");
                         } else {
-                            statusLabel.setText(result);
+                            setStatus(result);
                         }
                     });
                 });
                 fileContent.setText(text);
+                enableButtons();
                 return null;
             }
         };
         Thread th = new Thread(task);
         th.setDaemon(true);
         th.start();
-        enableButtons();
+
     }
 
     private boolean resultIsSuccess(String result) {
@@ -60,44 +60,50 @@ public class Controller {
 
     @FXML
     public void writeClicked() {
-        System.out.println("WRITE CLICKED");
-        disableButtons();
-
+        disableControls();
         Task task = new Task<Void>() {
             @Override
             public Void call() throws Exception {
                 iLibrary.writeFile(fileName.getText(), fileContent.getText(), (result) -> {
                     Platform.runLater(() -> {
                         if (resultIsSuccess(result)) {
-                            statusLabel.setText("Write to file finished!");
-                        } else if (resultIsFaiulure(result)) {
-                            statusLabel.setText("Write to file failed!");
+                            setStatus("Write to file finished!");
+                        } else if (resultIsFailure(result)) {
+                            setStatus("Write to file failed!");
                         } else {
-                            statusLabel.setText(result);
+                            setStatus(result);
                         }
                     });
                 });
+                enableButtons();
                 return null;
             }
         };
         Thread th = new Thread(task);
         th.setDaemon(true);
         th.start();
-        enableButtons();
 
     }
 
-    private boolean resultIsFaiulure(String result) {
+    private void setStatus(String value) {
+        statusLabel.setText(value);
+    }
+
+    private boolean resultIsFailure(String result) {
         return result.equals(FAILURE);
     }
 
     private void enableButtons() {
         readBtn.setDisable(false);
         writeBtn.setDisable(false);
+        fileContent.setDisable(false);
+        fileName.setDisable(false);
     }
 
-    private void disableButtons() {
+    private void disableControls() {
         writeBtn.setDisable(true);
         readBtn.setDisable(true);
+        fileContent.setDisable(true);
+        fileName.setDisable(true);
     }
 }
